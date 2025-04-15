@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}Menu{% endblock %}
+
+{% block content %}
+<div class="dashboard-page">
+    <div class="sidebar">
+        <h2>Gender Detection System</h2>
+        <ul>
+            <li><a href="{{ url_for('upload_data') }}">Upload Data</a></li>
+            <li><a href="{{ url_for('reports') }}">Reports</a></li>
+            <li><a href="{{ url_for('reminders') }}">Reminders</a></li>
+            <li><a href="{{ url_for('settings') }}">Settings</a></li>
+        </ul>
+    </div>
+    <div class="dashboard-main-content">
+        <h1>Welcome, {{ session['username'] }}</h1>
+        <p>Select an option from the menu to get started.</p>
+        
+        {% if graph_path %}
+        <div class="visualization-section">
+            <h3>Batch Detection Statistics</h3>
+            <img src="{{ url_for('static', filename=graph_path) }}" alt="Batch Statistics">
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

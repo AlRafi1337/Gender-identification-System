@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+
+{% block title %}Upload Data{% endblock %}
+
+{% block content %}
+<div class="feature-page upload-page">
+    <h2>Upload Radiographs</h2>
+    <form action="{{ url_for('upload_data') }}" method="POST" enctype="multipart/form-data">
+        <label for="files">Select images (JPG, PNG, DCM):</label>
+        <input type="file" name="files" id="files" multiple required>
+        <button type="submit" class="btn-upload">Upload</button>
+    </form>
+    
+    
+
+    {% if summary %}
+    <div class="summary-section">
+        <h3>Dataset Summary</h3>
+        <ul>
+            <li><strong>Total Images:</strong> {{ summary.total_images }}</li>
+            <li><strong>Male Detections:</strong> {{ summary.male_count }}</li>
+            <li><strong>Female Detections:</strong> {{ summary.female_count }}</li>
+            <li><strong>Low-Confidence Detections:</strong> {{ summary.low_confidence }}</li>
+        </ul>
+    </div>
+    {% endif %}
+
+    {% if graph_path %}
+    <div class="visualization-section">
+        <h3>Dataset Summary Visualization</h3>
+        <img src="{{ url_for('static', filename=graph_path) }}" alt="Summary Graph">
+    </div>
+    {% endif %}
+
+    {% if results %}
+    <div class="results-section">
+        <h3>Detection Results</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Filename</th>
+                    <th>Gender</th>
+                    <th>Confidence (%)</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for result in results %}
+                <tr>
+                    <td>{{ result.filename }}</td>
+                    <td>{{ result.label }}</td>
+                    <td>{{ result.confidence }}</td>
+                    <td>
+                        {% if result.flagged %}
+                        <span class="flagged">Low Confidence</span>
+                        {% else %}
+                        <span class="ok">OK</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% endif %}
+
+    {% if visualizations %}
+    <div class="visualization-section">
+        <h3>Detection Visualizations</h3>
+        <div class="visualizations-grid">
+            {% for image in visualizations %}
+            <img src="{{ url_for('static', filename=image) }}" alt="Detection Visualization">
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+    
+    <div class="actions">
+        <a href="{{ url_for('reports') }}" class="btn-report">Generate Report</a>
+    </div>
+</div>
+{% if graph_path %}
+<div class="visualization-section">
+    <h3>Dataset Summary Visualization</h3>
+    <img src="{{ url_for('static', filename=graph_path) }}" alt="Summary Graph">
+</div>
+{% endif %}
+
+{% if image_path %}
+<div class="visualization-section">
+    <h3>Detection Visualization</h3>
+    <img src="{{ url_for('static', filename=image_path) }}" alt="Detection Image">
+</div>
+{% endif %}
+
+{% endblock %}

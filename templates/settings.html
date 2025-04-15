@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}Settings{% endblock %}
+
+{% block content %}
+
+<div class="feature-page settings-page">
+    <h2>Settings</h2>
+    <form action="{{ url_for('settings') }}" method="POST">
+        <label for="email">Email:</label>
+        <input type="email" name="email" id="email" value="{{ email }}" required>
+        <label for="password">New Password:</label>
+        <input type="password" name="password" id="password" required>
+        <button type="submit" class="btn-upload">Update Settings</button>
+    </form>
+</div>
+{% endblock %}

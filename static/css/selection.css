@@ -1,0 +1,162 @@
+/* Selection Page Container */
+.selection-page {
+    
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem;
+    min-height: calc(100vh - 100px); /* Accounts for potential header/footer */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 0.5s ease-out;
+    background: url('/static/images/ez.jpg') no-repeat center center;
+    background-size: cover;
+}
+
+/* Page Title */
+.selection-page h2 {
+    text-align: center;
+    color: #333;
+    font-size: 2.25rem;
+    font-weight: 600;
+    margin-bottom: 3rem;
+    position: relative;
+    letter-spacing: 1px;
+}
+
+.selection-page h2::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(90deg, #00d4ff, #ff6600);
+    border-radius: 2px;
+}
+
+/* Options Container */
+.options-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    padding: 1rem;
+    max-width: 800px;
+}
+
+/* Option Cards */
+.option-card {
+    background: #ffffff;
+    border-radius: 15px;
+    padding: 1.75rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid #eaeaea;
+    cursor: pointer;
+}
+
+.option-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    border-color: #00d4ff;
+}
+
+.option-card h3 {
+    color: #333;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    transition: color 0.3s ease;
+    text-align: center;
+}
+
+.option-card:hover h3 {
+    color: #00d4ff;
+}
+
+.option-card p {
+    color: #666;
+    font-size: 1rem;
+    line-height: 1.6;
+    text-align: center;
+}
+
+/* Logout Button */
+.option-card.logout {
+    background: #fff;
+    text-align: center;
+    border: 1px solid #ff4444;
+    transition: all 0.3s ease;
+}
+
+.option-card.logout h3 {
+    color: #ff4444;
+    font-size: 1.25rem;
+    margin: 0;
+}
+
+.option-card.logout:hover {
+    background: #fff5f5;
+    border-color: #ff0000;
+    transform: scale(1.05);
+}
+
+.option-card.logout:hover h3 {
+    color: #ff0000;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .options-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .selection-page {
+        padding: 2rem 1rem;
+    }
+    .selection-page h2 {
+        font-size: 1.875rem;
+    }
+    .options-container {
+        grid-template-columns: 1fr;
+    }
+    .option-card {
+        padding: 1.5rem;
+    }
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Accessibility */
+.option-card:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.5);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .option-card,
+    .selection-page {
+        animation: none;
+        transform: none !important;
+        transition: none !important;
+    }
+}

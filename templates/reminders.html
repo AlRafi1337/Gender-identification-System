@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}Reminders{% endblock %}
+
+{% block content %}
+<div class="feature-page reminders-page">
+    <h2>Reminders</h2>
+
+    <form action="{{ url_for('reminders') }}" method="POST">
+        <label for="task">Task:</label>
+        <input type="text" name="task" id="task" placeholder="Enter task description" required>
+
+        <label for="date">Date:</label>
+        <input type="date" name="date" id="date" required>
+
+        <button type="submit" class="btn-add-reminder">Add Reminder</button>
+    </form>
+
+    <h3>Upcoming Reminders</h3>
+    {% if reminders %}
+    <ul class="reminders-list">
+        {% for reminder in reminders %}
+        <li>
+            <strong>{{ reminder.task }}</strong> - {{ reminder.date }}
+            <form action="{{ url_for('delete_reminder', index=loop.index0) }}" method="POST" style="display: inline;">
+                <button type="submit" class="btn-delete-reminder">Delete</button>
+            </form>
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>No reminders set.</p>
+    {% endif %}
+</div>
+{% endblock %}

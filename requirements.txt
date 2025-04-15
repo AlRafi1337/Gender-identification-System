@@ -1,0 +1,7 @@
+Flask
+Werkzeug
+ultralytics
+opencv-python
+matplotlib
+numpy
+fpdf

@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}Classification Selection{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/selection.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="selection-page">
+    <h2>Select a Classification System</h2>
+    <div class="options-container">
+        <a href="{{ url_for('menu') }}" class="option-card">
+            <h3>Gender Classification System</h3>
+            <p>Analyze and classify gender using radiographs.</p>
+        </a>
+        <a href="#" class="option-card">
+            <h3>Malocclusion Classification</h3>
+            <p>Identify types of malocclusion from dental images.</p>
+        </a>
+        <a href="#" class="option-card">
+            <h3>Bitewing Classification</h3>
+            <p>Detect bitewing characteristics for dental assessments.</p>
+        </a>
+        <a href="{{ url_for('logout') }}" class="option-card logout">
+            <h3>Logout</h3>
+        </a>
+
+        <!-- User Manual Button -->
+        <a href="{{ url_for('static', filename='images/User.pdf') }}" target="_blank" class="option-card manual">
+            <h3>User Manual</h3>
+            <p>Download the user manual for the system.</p>
+        </a>
+    </div>
+</div>
+{% endblock %}
